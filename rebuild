@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+pushd /etc/nixos >> /dev/null
+echo "building now..."
+git add .
+nixos-rebuild switch --flake .#v-server
+gen=$(nixos-rebuild list-generations | grep True | grep -o "[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*  [0-9\.a-zA-Z]*")
+git add .
+git commit -m "$gen"
+git pull
+git push
+popd >> /dev/null
+echo "Complete."
