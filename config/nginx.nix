@@ -7,6 +7,14 @@
     recommendedTlsSettings = true;
 
     virtualHosts = {
+      "social.thomascreagh.com" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://192.168.26.7:55001";
+          proxyWebsockets = true;
+        };
+      };
       "mail.0x74.net" = {
         forceSSL = true;
         enableACME = true;
