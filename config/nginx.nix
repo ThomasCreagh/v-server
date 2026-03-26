@@ -10,7 +10,7 @@ let
   mkWellKnown = data: ''
     default_type application/json;
     add_header Access-Control-Allow-Origin *;
-    return 200 '''${builtins.toJSON data}''';
+    return 200 '${builtins.toJSON data}';
   '';
 in {
   services.nginx = {
@@ -64,8 +64,8 @@ in {
         locations."/" = {
           root = "/var/www/0x74.net";
         };
-        locations."/.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
-        locations."/.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+        #locations."/.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        #locations."/.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
         extraConfig = ''
           add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
           add_header X-Frame-Options "DENY" always;
