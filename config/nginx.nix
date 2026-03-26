@@ -1,12 +1,38 @@
 { config, lib, pkgs, ... }:
-
-{
+let
+  serverConfig = {
+    "m.server" = "matrix.0x74.net:443";
+  };
+  clientConfig = {
+    "m.homeserver".base_url = "https://matrix.0x74.net";
+    "m.identity_server" = {};
+  };
+  mkWellKnown = data: ''
+    default_type application/json;
+    add_header Access-Control-Allow-Origin *;
+    return 200 "${builtins.toJSON data}";
+  '';
+in {
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-
+  
     virtualHosts = {
+      "matrix.0x74.com" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://192.168.26.7:8008";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $host;
+            client_max_body_size 100M;
+          '';
+        };
+      };
       "social.thomascreagh.com" = {
         forceSSL = true;
         enableACME = true;
@@ -38,6 +64,8 @@
         locations."/" = {
           root = "/var/www/0x74.net";
         };
+        locations."/.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."/.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
         extraConfig = ''
           add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
           add_header X-Frame-Options "DENY" always;
