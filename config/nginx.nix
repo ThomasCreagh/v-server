@@ -1,11 +1,13 @@
 { config, lib, pkgs, ... }:
 let
-  serverConfig = {
-    "m.server" = "matrix.0x74.net:443";
-  };
+  domain = "0x74.net";
+  matrixDomain = "matrix.${domain}";
   clientConfig = {
-    "m.homeserver".base_url = "https://matrix.0x74.net";
+    "m.homeserver".base_url = "https://${matrixDomain}";
     "m.identity_server" = {};
+  };
+  serverConfig = {
+    "m.server" = "${matrixDomain}:443";
   };
   mkWellKnown = data: ''
     default_type application/json;
@@ -13,18 +15,18 @@ let
     return 200 '${builtins.toJSON data}';
   '';
 in {
+  services.nginx.virtualHosts.
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
   
     virtualHosts = {
-      "matrix.0x74.com" = {
-        forceSSL = true;
+      ${matrixDomain} = {
         enableACME = true;
+        forceSSL = true;
         locations."/" = {
           proxyPass = "http://192.168.26.7:8008";
-          proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Forwarded-Proto $scheme;
@@ -64,8 +66,8 @@ in {
         locations."/" = {
           root = "/var/www/0x74.net";
         };
-        #locations."/.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
-        #locations."/.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
         extraConfig = ''
           add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
           add_header X-Frame-Options "DENY" always;

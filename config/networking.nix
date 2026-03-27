@@ -12,7 +12,7 @@
     mode = "0400";
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 25 465 587 993 7777 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 25 465 587 993 7777 8448 ];
   networking.firewall.allowedUDPPorts = [ 51820 ];
 
   networking.nat = {
@@ -22,6 +22,7 @@
     internalIPs = [ "192.168.26.0/24" ];
     forwardPorts = [
       { sourcePort = 7777; destination = "192.168.26.7:7777"; proto = "tcp"; }
+      { sourcePort = 8448; destination = "192.168.26.7:7777"; proto = "tcp"; }
     ];
   };
 
