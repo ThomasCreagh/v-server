@@ -4,6 +4,10 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "admin@0x74.net";
+    certs."turn.0x74.net" = {
+      group = "nginx";
+      postRun = "systemctl reload nginx.service; systemctl restart coturn.service";
+    };
   };
 
   age.secrets.wireguard = {
@@ -12,7 +16,20 @@
     mode = "0400";
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 25 465 587 993 7777 ];
+  networking.firewall.allowedTCPPorts = [
+    80    # http
+    443   # https
+    25    # email
+    465   # email
+    587   # email
+    993   # email
+    7777  # terraria
+    5349  # STUN tls
+    5350  # STUN tls alt
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    { from=49152; to=49999; }
+  ];
   networking.firewall.allowedUDPPorts = [ 51820 ];
 
   networking.nat = {

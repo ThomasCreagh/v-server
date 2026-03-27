@@ -14,6 +14,7 @@
       system = "x86_64-linux";
       modules = [
         ./config/stalwart.nix
+	./config/coturn.nix
         ./config/system.nix
         ./config/hardware.nix
         ./config/networking.nix

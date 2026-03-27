@@ -26,6 +26,10 @@ in {
     recommendedTlsSettings = true;
   
     virtualHosts = {
+      "turn.0x74.net" = {
+        forceSSL = true;
+        enableACME = true;
+      };
       ${matrixDomain} = {
         enableACME = true;
         forceSSL = true;
