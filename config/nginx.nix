@@ -12,10 +12,14 @@ let
   mkWellKnown = data: ''
     default_type application/json;
     add_header Access-Control-Allow-Origin *;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self';" always;
     return 200 '${builtins.toJSON data}';
   '';
 in {
-  services.nginx.virtualHosts.
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -63,11 +67,11 @@ in {
         forceSSL = true;
         enableACME = true;
         serverAliases = [ "www.0x74.net" ];
+        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
         locations."/" = {
           root = "/var/www/0x74.net";
         };
-        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
-        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
         extraConfig = ''
           add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
           add_header X-Frame-Options "DENY" always;
