@@ -3,5 +3,4 @@ let
 in {
   "secrets/stalwartAdmin.age".publicKeys = [ vServer ];
   "secrets/wireguard.age".publicKeys = [ vServer ];
-  "secrets/coturn.age".publicKeys = [ vServer ];
 }
