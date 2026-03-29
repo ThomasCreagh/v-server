@@ -24,6 +24,7 @@
     587   # email
     993   # email
     7777  # terraria
+    6767  # terraria
     #5349  # STUN tls
     #5350  # STUN tls alt
   ];
@@ -39,6 +40,7 @@
     internalIPs = [ "192.168.26.0/24" ];
     forwardPorts = [
       { sourcePort = 7777; destination = "192.168.26.7:7777"; proto = "tcp"; }
+      { sourcePort = 6767; destination = "192.168.26.7:7777"; proto = "tcp"; }
       # { sourcePort = 8448; destination = "192.168.26.7:7777"; proto = "tcp"; }
     ];
   };
