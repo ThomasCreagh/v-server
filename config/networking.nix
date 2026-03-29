@@ -24,13 +24,13 @@
     587   # email
     993   # email
     7777  # terraria
-    5349  # STUN tls
-    5350  # STUN tls alt
+    #5349  # STUN tls
+    #5350  # STUN tls alt
   ];
-  networking.firewall.allowedUDPPortRanges = [
-    { from=49152; to=49999; }
-  ];
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  #networking.firewall.allowedUDPPortRanges = [
+  #  { from=49152; to=49999; }
+  #];
+  #networking.firewall.allowedUDPPorts = [ 51820 ];
 
   networking.nat = {
     enable = true;
