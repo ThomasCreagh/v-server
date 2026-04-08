@@ -12,15 +12,18 @@
     mode = "0400";
   };
 
-  networking.firewall.allowedTCPPorts = [
-    80    # http
-    443   # https
-    25    # email
-    465   # email
-    587   # email
-    993   # email
-    7777  # terraria
-  ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      80    # http
+      443   # https
+      25    # email
+      465   # email
+      587   # email
+      993   # email
+      7777  # terraria
+    ];
+    allowedUDPPorts = [ 51820 ];
+  };
 
   networking.nat = {
     enable = true;
