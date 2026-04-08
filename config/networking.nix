@@ -21,8 +21,12 @@
       587   # email
       993   # email
       7777  # terraria
+      53    # systemd.resolve
     ];
-    allowedUDPPorts = [ 51820 ];
+    allowedUDPPorts = [
+      51820 # wireguard
+      53    # systemd.resolve
+    ];
   };
 
   networking.nat = {
