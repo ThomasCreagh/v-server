@@ -40,6 +40,7 @@
   };
 
   networking.useNetworkd = true;
+  services.resolved.settings.Resolve.DNSStubListenerExtra = "192.168.26.1";
 
   systemd.network = {
     enable = true;
