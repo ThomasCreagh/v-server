@@ -60,19 +60,20 @@
           add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self';" always;
         '';
       };
+      "gear.thomascreagh.com" = {
+        forceSSL = true;
+        enableACME = true;
+        acmeRoot = "/var/lib/acme/acme-challenge";
+        locations."/" = {
+          proxyPass = "http://192.168.26.7:8001";
+          proxyWebsockets = true;
+        };
+      };
       "monitor.0x74.net" = {
         forceSSL = true;
         enableACME = true;
         locations."/" = {
           proxyPass = "http://192.168.26.7:3000";
-          proxyWebsockets = true;
-        };
-      };
-      "gear.thomascreagh.com" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://192.168.26.7:8001";
           proxyWebsockets = true;
         };
       };
