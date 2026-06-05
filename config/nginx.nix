@@ -68,6 +68,12 @@
           proxyPass = "http://192.168.26.7:8001";
           proxyWebsockets = true;
         };
+        locations."/uploads/" = {
+          proxyPass = "http://192.168.26.7:8001";
+          extraConfig = ''
+            proxy_buffering off;
+          '';
+        };
       };
       "monitor.0x74.net" = {
         forceSSL = true;
