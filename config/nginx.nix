@@ -68,6 +68,14 @@
           proxyWebsockets = true;
         };
       };
+      "gear.thomascreagh.com" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://192.168.26.7:8001";
+          proxyWebsockets = true;
+        };
+      };
       "vault.0x74.net" = {
         forceSSL = true;
         enableACME = true;
