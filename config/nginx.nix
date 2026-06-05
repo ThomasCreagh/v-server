@@ -53,7 +53,7 @@
           root = "/var/www/thomascreagh.com";
         };
         extraConfig = ''
-          add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+          #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
           add_header X-Frame-Options "DENY" always;
           add_header X-Content-Type-Options "nosniff" always;
           add_header Referrer-Policy "strict-origin-when-cross-origin" always;
@@ -63,7 +63,7 @@
       "gear.thomascreagh.com" = {
         forceSSL = true;
         enableACME = true;
-        acmeRoot = "/var/lib/acme/acme-challenge";
+        # acmeRoot = "/var/lib/acme/acme-challenge";
         locations."/" = {
           proxyPass = "http://192.168.26.7:8001";
           proxyWebsockets = true;
