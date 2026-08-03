@@ -8,7 +8,7 @@
 
   age.secrets.wireguard = {
     file = ../secrets/wireguard.age;
-    owner = "root";
+    owner = "systemd-network";
     mode = "0400";
   };
 
