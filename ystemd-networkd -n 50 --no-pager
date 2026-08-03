@@ -1,0 +1,31 @@
+[0;1;32m●[0m systemd-networkd.service - Network Configuration
+     Loaded: loaded (]8;;file://v-server/etc/systemd/system/systemd-networkd.service\/etc/systemd/system/systemd-networkd.service]8;;\; [0;1;32menabled[0m; preset: ignored)
+    Drop-In: /nix/store/0nd98077yd1xraclknn7rv02knhx2w4g-system-units/systemd-networkd.service.d
+             └─]8;;file://v-server/nix/store/0nd98077yd1xraclknn7rv02knhx2w4g-system-units/systemd-networkd.service.d/overrides.conf\overrides.conf]8;;\
+     Active: [0;1;32mactive (running)[0m since Tue 2026-08-04 00:25:59 CEST; 53s ago
+ Invocation: fec21fa8bcac42aca85f8fe2a454d41f
+TriggeredBy: [0;1;32m●[0m systemd-networkd.socket
+             ○ systemd-networkd-varlink.socket
+       Docs: ]8;;man:systemd-networkd.service(8)\man:systemd-networkd.service(8)]8;;\
+             ]8;;man:org.freedesktop.network1(5)\man:org.freedesktop.network1(5)]8;;\
+   Main PID: 2736213 (systemd-network)
+     Status: "[0;1;36mProcessing requests...[0m"
+         IP: 64B in, 224B out
+         IO: 0B read, 0B written
+      Tasks: 1[0;38;5;245m (limit: 4563)[0m
+   FD Store: 1[0;38;5;245m (limit: 512)[0m
+     Memory: 1.8M (peak: 2.4M)
+        CPU: 51ms
+     CGroup: /system.slice/systemd-networkd.service
+             └─[0;38;5;245m2736213 /nix/store/5j9cg6adv3d2l403fcfklz4lmf9fd0l8-systemd-258.3/lib/systemd/systemd-networkd[0m
+
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185m]8;;file://v-server/etc/systemd/network/50-wg0.netdev\/etc/systemd/network/50-wg0.netdev]8;;\:8: PrivateKeyFile= path is not absolute, ignoring: %{file:/run/agenix/wireguard}%[0m
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: [0;1;31m[0;1;39m[0;1;31mwg0: /etc/systemd/network/50-wg0.netdev: No private key specified and default key isn't available, ignoring network device: No such file or directory[0m
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: lo: Link UP
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: lo: Gained carrier
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: enp1s0: Link UP
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: enp1s0: Gained carrier
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: enp1s0: Gained IPv6LL
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: enp1s0: Configuring with /etc/systemd/network/10-enp1s0.network.
+Aug 04 00:25:59 v-server systemd[1]: Started Network Configuration.
+Aug 04 00:25:59 v-server systemd-networkd[2736213]: enp1s0: DHCPv4 address 91.98.237.217/32, gateway 172.31.1.1 acquired from 172.31.1.1

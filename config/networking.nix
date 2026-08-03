@@ -72,7 +72,7 @@
       netdevConfig = { Kind = "wireguard"; Name = "wg0"; MTUBytes = "1320"; };
       wireguardConfig = {
         ListenPort = 51820;
-        PrivateKeyFile = "%{file:${config.age.secrets.wireguard.path}}%";
+        PrivateKeyFile = config.age.secrets.wireguard.path;
       };
 
       wireguardPeers = [
