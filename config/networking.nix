@@ -69,10 +69,7 @@
     };
 
     netdevs."50-wg0" = {
-      netdevConfig = {
-        Kind = "wireguard";
-        Name = "wg0";
-      };
+      netdevConfig = { Kind = "wireguard"; Name = "wg0"; MTUBytes = "1360"; };
       wireguardConfig = {
         ListenPort = 51820;
         PrivateKeyFile = "%{file:${config.age.secrets.wireguard.path}}%";
